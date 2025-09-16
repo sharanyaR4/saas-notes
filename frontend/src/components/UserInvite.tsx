@@ -30,6 +30,9 @@ function useUsers() {
       setError(null);
 
       const token = getToken();
+
+      if(!token){
+        throw new Error("token not found") }
       
       // Decode JWT to get tenant_id
       const decodedToken = decodeJWT(token);
