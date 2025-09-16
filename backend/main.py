@@ -10,7 +10,7 @@ app = FastAPI(title="SaaS Notes API", version="1.0.0")
 # CORS middleware
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Allow all origins for the assignment
+    allow_origins=["https://saas-notes-sharanya.vercel.app"],  # Allow all origins for the assignment
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
