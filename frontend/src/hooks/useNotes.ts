@@ -32,19 +32,17 @@ export function useNotes() {
     }
   };
 
-  const updateNote = async (id: number, noteData: NoteUpdate) => {
-    try {
-      setError(null);
-      const updatedNote = await notesApi.update(id, noteData);
-      setNotes(prev => prev.map(note => 
-        note.id === id ? updatedNote : note
-      ));
-      return updatedNote;
-    } catch (error: any) {
-      setError(error.message || 'Failed to update note');
-      throw error;
-    }
-  };
+  const updateNote = async (id: number, noteData: NoteUpdate): Promise<void> => {
+  const res = await fetch(`/api/notes/${id}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(noteData),
+  });
+
+  if (!res.ok) throw new Error("Failed to update note");
+
+  await res.json(); // don’t return it
+};
 
   const deleteNote = async (id: number) => {
     try {
